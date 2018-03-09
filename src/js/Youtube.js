@@ -21,7 +21,7 @@ class Youtube extends Component {
       
     };
     
-    this.fetchData = this.fetchData.bind(this);
+    // this.fetchData = this.fetchData.bind(this);
     this.delCurrentSong = this.delCurrentSong.bind(this);
     this.insertSongToFirst = this.insertSongToFirst.bind(this);
     this.insertSongToQueue = this.insertSongToQueue.bind(this);
@@ -51,21 +51,21 @@ class Youtube extends Component {
   
 
   componentDidMount(){
-
+  
     console.log('componentDidMount')
       const date = localStorage.getItem('videosDate');
       const videosDate = date && new Date(parseInt(date, 10));
       const now = new Date();
-
+  
       const dataAge = Math.round((now - videosDate) / (1000 * 60)); // in minutes
       const tooOld = dataAge >= 10;
-
+  
       if(tooOld){
           this.fetchData();            
       } else {
           console.log(`Using data from localStorage that are ${dataAge} minutes old.`);
       }
-
+  
   }
   
 
@@ -101,8 +101,6 @@ class Youtube extends Component {
   componentWillUpdate(nextProps, nextState) {
       localStorage.setItem('videos', JSON.stringify(nextState.videos));
       localStorage.setItem('videosDate', Date.now());
-
-
   }
 
   insertSongToFirst(vid){
@@ -123,7 +121,6 @@ class Youtube extends Component {
   }
 
   
-  
   render() {
     console.log('rendering...')
     const {videos} = this.state;
@@ -132,10 +129,8 @@ class Youtube extends Component {
     return(
       <div>
         
-        
         <div className="row">
           <div className="col-md-10">
-            
             {
               
               videos.length > 0 ? (
@@ -172,8 +167,17 @@ class Youtube extends Component {
                   return (
                     <div key={vid.id}>
                       <img src={`${vid.thumbnail}`} alt={vid.id} onClick={e => this.insertSongToFirst(vid)}/>
+                      <div>
+                        <button className="btn btn-default btn-xs"
+                          // onClick={(e) => {this.playNow(vid.id)}}
+                          onClick={(e) => {this.refs.Player.playThis(vid.id)}}
+                          >Play Now</button>
+                        
+                        <button className="btn btn-default btn-xs"
+                          onClick={(e) => {this.delCurrentSong(vid.id)}}
+                          >Delete</button>
+                      </div>
                       <p>{vid.title}</p>
-                      
                     </div>
                     
                   )

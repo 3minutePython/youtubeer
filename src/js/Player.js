@@ -43,6 +43,10 @@ class Player extends Component{
   	player.loadVideoById(this.props.id, 0, 'default');
   }
   
+  playThis(id) {
+  	player.loadVideoById(id, 0, 'default');
+  }
+  
   onPlayerStateChange = (e) => {
     console.log('Player state changed: ' + e.data)
     if(e.data === 0) {
