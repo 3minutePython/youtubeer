@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import '../css/App.css';
 import Youtube from './Youtube';
 
 class App extends Component {
@@ -8,10 +7,9 @@ class App extends Component {
     return (
       <div className="App">
         
-        <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        {/* <header className="App-header">
           <h1 className="App-title">Super Karaoke</h1>
-        </header>
+        </header> */}
         
         <Youtube />
       </div>

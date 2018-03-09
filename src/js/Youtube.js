@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import Iframe from './Iframe'
 import Player from './Player';
-import './css/main.css';
+import Search from './Search';
+import '../css/main.css';
 
 const API = 'AIzaSyDUl8uWs-HIm_EUGVJcZGatOrBXbxdLpDM'
-const qry = 'karen gillian'
+const qry = 'karaoke'
 const result = 5
-
-// https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDUl8uWs-HIm_EUGVJcZGatOrBXbxdLpDM&q=sexy
-
-
 var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${API}&q=${qry}&part=snippet&maxResults=${result}`
+
+
+
 class Youtube extends Component {
   
   constructor(props){
@@ -24,7 +23,8 @@ class Youtube extends Component {
     
     this.fetchData = this.fetchData.bind(this);
     this.delCurrentSong = this.delCurrentSong.bind(this);
-    this.insertSong = this.insertSong.bind(this);
+    this.insertSongToFirst = this.insertSongToFirst.bind(this);
+    this.insertSongToQueue = this.insertSongToQueue.bind(this);
   }
   
   
@@ -105,7 +105,7 @@ class Youtube extends Component {
 
   }
 
-  insertSong(vid){
+  insertSongToFirst(vid){
     const newVideos = this.state.videos.filter(i => {
       return i !== vid;
     })
@@ -114,6 +114,14 @@ class Youtube extends Component {
     })
   }
   
+  insertSongToQueue(vid){
+    console.log(vid);
+    this.setState({
+      videos: [...this.state.videos, vid]
+    })
+    console.log(this.state.videos)
+  }
+
   
   
   render() {
@@ -122,7 +130,7 @@ class Youtube extends Component {
     
 
     return(
-      <div className="container">
+      <div>
         
         
         <div className="row">
@@ -140,68 +148,48 @@ class Youtube extends Component {
             }
             
             <div>
-              <button className="btn btn-default" onClick={(e) => {this.fetchData();}}>Get youtube videos</button>
+              
+              
+              {/* <button className="btn btn-default" onClick={(e) => {this.fetchData();}}>Get youtube videos</button>
+              
               {console.log(videos.length)}
               {
                 videos.length > 0 ? (
                   <button className="btn btn-default" onClick={(e) => {this.delCurrentSong(videos[0].id);}}>Next Song</button>
                 ): null
-              }
+              } */}
               
             </div>
-            
-            <input type="text"/>
+            <Search insertSongToQueue = {this.insertSongToQueue}/>
             
           </div>
           
           
           <div className="col-md-2">
-            {
-              videos.map(vid => {
-                return (
-                  <div key={vid.id}>
-                    <p>{vid.title}</p>
-                    <img src={`${vid.thumbnail}`} alt={vid.id} onClick={e => this.insertSong(vid)}/>
+            <div className="pre-scrollable">
+              {
+                videos.map(vid => {
+                  return (
+                    <div key={vid.id}>
+                      <img src={`${vid.thumbnail}`} alt={vid.id} onClick={e => this.insertSongToFirst(vid)}/>
+                      <p>{vid.title}</p>
+                      
+                    </div>
                     
-                  </div>
-                  
-                )
-              })
-            }
-            
+                  )
+                })
+              }
+              
+              
+            </div>
           </div>
           
         </div>
         
-        {/* {
-            !isLoading && contacts.length > 0 ? contacts.map(contact => {
-                const {username, name, email, location} = contact;
-                return <Collapsible key={username} title={name}>
-                    <p>{email}<br />{location}</p>
-                </Collapsible>
-            }) : null
-        } */}
 
         
 
         
-        {/* {
-          this.state.resultyt.map((link, i) => {
-            console.log(link)  
-            let frame = (
-              <div key={i} className="youtube">
-                <iframe title="This is a title"
-                  width="560" height="315"
-                  src={link}
-                  frameBorder="0" allow="encrypted-media" allowFullScreen></iframe>
-              </div>
-            )
-            return frame;
-          })
-        }
-        
-        {this.frame}
-         */}
       </div>
     )
   }
