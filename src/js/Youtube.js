@@ -3,7 +3,7 @@ import Player from './Player';
 import Search from './Search';
 import '../css/main.css';
 
-const API = 'AIzaSyDUl8uWs-HIm_EUGVJcZGatOrBXbxdLpDM'
+const API = 'useyourown'
 const qry = 'karaoke'
 const result = 5
 var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${API}&q=${qry}&part=snippet&maxResults=${result}`
