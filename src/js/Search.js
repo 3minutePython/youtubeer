@@ -81,7 +81,7 @@ class Search extends React.Component {
           {
             this.state.videosSearch.map(vid => {
               return (
-                  <img src={`${vid.thumbnail}`} alt={vid.id} onClick={e => this.props.insertSongToQueue(vid)} />
+                  <img style={{cursor: 'pointer'}} src={`${vid.thumbnail}`} alt={vid.id} onClick={e => this.props.insertSongToQueue(vid)} />
                 // {/* <div key={vid.id} >
                 //   <img src={`${vid.thumbnail}`} alt={vid.id} onClick={e => this.props.insertSongToQueue(vid)} />
                 //     <p>{vid.title}</p>

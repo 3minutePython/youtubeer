@@ -166,7 +166,7 @@ class Youtube extends Component {
                 videos.map(vid => {
                   return (
                     <div key={vid.id}>
-                      <img src={`${vid.thumbnail}`} alt={vid.id} onClick={e => this.insertSongToFirst(vid)}/>
+                      <img style={{cursor: 'pointer'}} src={`${vid.thumbnail}`} alt={vid.id} onClick={e => this.insertSongToFirst(vid)}/>
                       <div>
                         <button className="btn btn-default btn-xs"
                           // onClick={(e) => {this.playNow(vid.id)}}
